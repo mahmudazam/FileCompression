@@ -239,7 +239,7 @@ char *decompressToBinaryString(const char *message, int size) {
 		decomp[((size - 1) * 8) - 8 + rem] = '\0';
 	}
 	char *decompressedMessage = copy(decomp);
-	delete decomp;
+	delete [] decomp;
 	return decompressedMessage;
 	return NULL;
 }

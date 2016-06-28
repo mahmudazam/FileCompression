@@ -165,7 +165,7 @@ char *encode(HuffmanCodec *h, const char message[]) {
 	
 	strcpy(codedMessage, temp);
 	
-	delete temp;
+	delete [] temp;
 	
 	return codedMessage;
 
