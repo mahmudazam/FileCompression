@@ -9,9 +9,9 @@
 //           every C++ file in the project needs
 
 // the size of the ASCII table
-#define ASCII_SIZE 128
+#define ASCII_SIZE 256
 
 // the size of input buffers
-#define MESSAGE_LIMIT 1000
+#define MESSAGE_LIMIT 10000
 
 // eof

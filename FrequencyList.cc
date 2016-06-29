@@ -72,6 +72,36 @@ FrequencyList *createFrequencyList(const char* message){
 	}
 }
 
+// createFrequencyList(message)
+// create the input list for the Huffman algorithm.
+// each node of the list contains a one node Tree.
+// the data stored in each Tree is a Frequency.
+// Pre: message:: refToChar, the message to count frequencies within
+// Return: a reference to the generated list.
+// post:  a new list is allocated
+// return: reference to the new list
+
+FrequencyList *createFrequencyList(const char* message, int size) {
+	int frequencies[ASCII_SIZE];
+	for(int i = 0; i < ASCII_SIZE; i++) frequencies[i] = 0;
+	for(int i = 0; i < size; i++) {
+		if(message[i] >= 0) frequencies[(int)message[i]]++;
+		else frequencies[(int)message[i] + 256]++;
+	}
+	FrequencyList *fList = new FrequencyList;
+	fList->freqs = createList();
+	for(int i = 0; i < ASCII_SIZE; i++) {
+		if(frequencies[i] != 0) {
+			char temp = '\0';
+			if(i >= 128) temp = (char)(i - 256);
+			else temp = (char)i;
+			insert(fList->freqs, createTreeNode(createFrequency(temp, frequencies[i])));
+		}
+	}
+
+	return fList;
+}
+
 
 // remove the smallest frequency tree from the list
 // Pre: l is a list containing Trees of Frequencies.
@@ -202,6 +232,26 @@ bool remove(FrequencyList *l, Element toRemove){
     return false;
   }
   return remove(l->freqs,toRemove);
+}
+
+// Helper function:
+// toString(fList)
+// Prints a given FrequencyList in a human readable format.
+// pre: fList:: FrequencyList*, the FrequencyList to be printed
+// post: fList is unchanged.
+// return: void
+void toString(FrequencyList* fList) {
+	if (fList == NULL){
+		cout << "NULL FrequencyList" << endl;
+		return;
+	}
+	Iterator *iter = createIterator(fList->freqs);
+	TreeNode* temp = NULL;
+	while(hasNext(iter)) {
+		temp = next(iter);
+		cout << "'" << getData(getData(temp)) << "'(";
+		cout << (int)getData(getData(temp)) << ") : " << getCount(getData(temp)) << endl;
+	}
 }
 
 

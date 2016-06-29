@@ -31,9 +31,18 @@ struct FrequencyList {
 // Return: a reference to the generated list.
 // post:  a new list is allocated
 // return: reference to the new list
-  
 FrequencyList *createFrequencyList(const char message[]);
 
+// createFrequencyList(message)
+// create the input list for the Huffman algorithm.
+// each node of the list contains a one node Tree.
+// the data stored in each Tree is a Frequency.
+// Pre: message:: refToChar, the message to count frequencies within
+//		size:: int, the size of the message array.
+// Return: a reference to the generated list.
+// post:  a new list is allocated
+// return: reference to the new list
+FrequencyList *createFrequencyList(const char message[], int size);
 
 
 //ACCESSORS
@@ -87,5 +96,12 @@ TreeNode *remove_smallest(FrequencyList *freqs);
 // post: the iterator is deallocated
 void destroyFrequencyList(FrequencyList *l);
 
+// Helper function:
+// toString(fList)
+// Prints a given FrequencyList in a human readable format.
+// pre: fList:: FrequencyList*, the FrequencyList to be printed
+// post: fList is unchanged.
+// return: void
+void toString(FrequencyList* fList);
 
 #endif
